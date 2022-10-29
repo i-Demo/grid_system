@@ -1,0 +1,123 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font: {
+        family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        size: 16px;
+    }
+}
+
+// ------------------------------------
+@function col($number) {
+    @return calc(100%/(12/$number));
+}
+@mixin set-col($num) {
+    flex: 0 0 col($num);
+    max-width: col($num);
+}
+// ------------------------------------
+
+// Set grid
+.grid {
+    width: 100%;
+    display: block;
+    padding: 0px;
+}
+
+// Set wide
+.grid.wide {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+// Set row
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -4px;
+    margin-right: -4px;
+}
+
+.row.no-gutters {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+// Set col
+.col {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.row.no-gutters .col {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.mob-0 {
+    display: none;
+}
+@for $i from 1 through 12 {
+    .mob-#{$i} {
+        @include set-col($i)
+    }
+}
+
+// Responsive
+// Pc medium screen
+@media (min-width: 1024px) and (max-width: 1239px) {
+    .wide {
+        width: 984px;
+    }
+}
+
+// Tablet
+@media (min-width: 740px) and (max-width: 1023px) {
+    .wide {
+        width: 644px;
+    }
+}
+
+@media (min-width: 740px) {
+    .col {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .row {
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+    .tab-0 {
+        display: none;
+    }
+    @for $i from 1 through 12 {
+        .tab-#{$i} {
+            @include set-col($i)
+        }
+    }
+}
+@media (min-width: 1113px) {
+    .col {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .row {
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+    .pc-0 {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    @for $i from 1 through 12 {
+        .pc-#{$i} {
+            @include set-col($i)
+        }
+    }
+}
+
+
